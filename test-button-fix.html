@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Fix Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .button-status {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-working { background-color: #10B981; }
+        .status-not-working { background-color: #EF4444; }
+        .status-unknown { background-color: #9CA3AF; }
+        .test-button {
+            transition: all 0.2s ease;
+        }
+        .test-button:hover {
+            transform: scale(1.05);
+        }
+        .test-button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold text-center my-6">Button Fix Verification</h1>
+        
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">Test Results</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-medium mb-2">Button Status</h3>
+                    <div id="buttonStatus" class="space-y-2">
+                        <!-- Button status will be populated here -->
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-medium mb-2">Test Console</h3>
+                    <div id="testConsole" class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm h-64 overflow-y-auto">
+                        <!-- Test console output will be shown here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-xl font-semibold mb-4">Button Categories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Navigation Buttons -->
+                <div class="border rounded-lg p-4">
+                    <h3 class="font-medium mb-3 text-lg">Navigation Buttons</h3>
+                    <div class="space-y-2">
+                        <button id="loginBtn" class="test-button w-full bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600">Login</button>
+                        <button id="logoutBtn" class="test-button w-full bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600">Logout</button>
+                        <button id="backBtn" class="test-button w-full bg-gray-500 text-white px-3 py-2 rounded hover:bg-gray-600">Back</button>
+                        <button id="getStartedBtn" class="test-button w-full bg-purple-500 text-white px-3 py-2 rounded hover:bg-purple-600">Get Started</button>
+                        <button id="ctaLoginBtn" class="test-button w-full bg-indigo-500 text-white px-3 py-2 rounded hover:bg-indigo-600">CTA Login</button>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="border rounded-lg p-4">
+                    <h3 class="font-medium mb-3 text-lg">Action Buttons</h3>
+                    <div class="space-y-2">
+                        <button id="uploadBtn" class="test-button w-full bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600">Upload</button>
+                        <button id="validateReference" class="test-button w-full bg-cyan-500 text-white px-3 py-2 rounded hover:bg-cyan-600">Validate Reference</button>
+                        <button type="submit" class="test-button w-full bg-orange-500 text-white px-3 py-2 rounded hover:bg-orange-600">Submit Form</button>
+                        <button type="button" class="test-button w-full bg-lime-500 text-white px-3 py-2 rounded hover:bg-lime-600">Generic Button</button>
+                    </div>
+                </div>
+                
+                <!-- Interactive Panel Buttons -->
+                <div class="border rounded-lg p-4">
+                    <h3 class="font-medium mb-3 text-lg">Interactive Panel</h3>
+                    <div class="space-y-2">
+                        <button id="at3600Btn" class="test-button w-full bg-yellow-500 text-white px-3 py-2 rounded hover:bg-yellow-600">AT 3600</button>
+                        <button id="trainingBtn" class="test-button w-full bg-teal-500 text-white px-3 py-2 rounded hover:bg-teal-600">Training</button>
+                        <button id="browseFilesBtn" class="test-button w-full bg-pink-500 text-white px-3 py-2 rounded hover:bg-pink-600">Browse Files</button>
+                        <button id="closePanel" class="test-button w-full bg-gray-700 text-white px-3 py-2 rounded hover:bg-gray-800">Close Panel</button>
+                    </div>
+                </div>
+                
+                <!-- Modal Buttons -->
+                <div class="border rounded-lg p-4">
+                    <h3 class="font-medium mb-3 text-lg">Modal Buttons</h3>
+                    <div class="space-y-2">
+                        <button id="closeModal" class="test-button w-full bg-gray-600 text-white px-3 py-2 rounded hover:bg-gray-700">Close Modal</button>
+                        <button id="closeUploadModal" class="test-button w-full bg-gray-600 text-white px-3 py-2 rounded hover:bg-gray-700">Close Upload Modal</button>
+                        <button id="closeReferenceMenu" class="test-button w-full bg-gray-600 text-white px-3 py-2 rounded hover:bg-gray-700">Close Reference Menu</button>
+                        <button id="uploadDownloadFile" class="test-button w-full bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700">Upload File</button>
+                    </div>
+                </div>
+                
+                <!-- Document Page Buttons -->
+                <div class="border rounded-lg p-4">
+                    <h3 class="font-medium mb-3 text-lg">Document Page</h3>
+                    <div class="space-y-2">
+                        <button class="submenu-option test-button w-full bg-blue-400 text-white px-3 py-2 rounded hover:bg-blue-500" data-option="Work Instructions">Work Instructions</button>
+                        <button class="submenu-option test-button w-full bg-blue-400 text-white px-3 py-2 rounded hover:bg-blue-500" data-option="Visual Aid">Visual Aid</button>
+                        <button class="submenu-option test-button w-full bg-blue-400 text-white px-3 py-2 rounded hover:bg-blue-500" data-option="Videos">Videos</button>
+                    </div>
+                </div>
+                
+                <!-- Control Buttons -->
+                <div class="border rounded-lg p-4">
+                    <h3 class="font-medium mb-3 text-lg">Control Panel</h3>
+                    <div class="space-y-2">
+                        <button id="runDiagnostics" class="test-button w-full bg-purple-600 text-white px-3 py-2 rounded hover:bg-purple-700">Run Diagnostics</button>
+                        <button id="fixButtons" class="test-button w-full bg-yellow-600 text-white px-3 py-2 rounded hover:bg-yellow-700">Apply Fixes</button>
+                        <button id="clearConsole" class="test-button w-full bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700">Clear Console</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/button-fix.js"></script>
+    <script>
+        // Test console logging
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        console.log = function() {
+            originalLog.apply(console, arguments);
+            addToTestConsole('log', Array.from(arguments).join(' '));
+        };
+        
+        console.error = function() {
+            originalError.apply(console, arguments);
+            addToTestConsole('error', Array.from(arguments).join(' '));
+        };
+        
+        console.warn = function() {
+            originalWarn.apply(console, arguments);
+            addToTestConsole('warn', Array.from(arguments).join(' '));
+        };
+        
+        function addToTestConsole(type, message) {
+            const testConsole = document.getElementById('testConsole');
+            const time = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.textContent = `[${time}] ${message}`;
+            if (type === 'error') {
+                entry.style.color = '#F87171';
+            } else if (type === 'warn') {
+                entry.style.color = '#FBBF24';
+            }
+            testConsole.appendChild(entry);
+            testConsole.scrollTop = testConsole.scrollHeight;
+        }
+        
+        // Button status tracking
+        const buttonStatus = {};
+        
+        // Function to update button status
+        function updateButtonStatus(buttonId, status, message) {
+            buttonStatus[buttonId] = { status, message };
+            renderButtonStatus();
+        }
+        
+        // Function to render button status
+        function renderButtonStatus() {
+            const container = document.getElementById('buttonStatus');
+            container.innerHTML = '';
+            
+            for (const [buttonId, statusInfo] of Object.entries(buttonStatus)) {
+                const item = document.createElement('div');
+                item.className = 'flex items-center';
+                item.innerHTML = `
+                    <span class="button-status status-${statusInfo.status}"></span>
+                    <span class="font-medium">${buttonId}:</span>
+                    <span class="ml-2 text-sm">${statusInfo.message}</span>
+                `;
+                container.appendChild(item);
+            }
+        }
+        
+        // Initialize button status
+        function initializeButtonStatus() {
+            const buttons = document.querySelectorAll('button[id]');
+            buttons.forEach(button => {
+                updateButtonStatus(button.id, 'unknown', 'Not tested');
+            });
+        }
+        
+        // Test individual button
+        function testButton(buttonId) {
+            const button = document.getElementById(buttonId);
+            if (button) {
+                try {
+                    // Simulate a click
+                    button.click();
+                    updateButtonStatus(buttonId, 'working', 'Click event triggered');
+                    console.log(`Button ${buttonId} responded to click event`);
+                } catch (error) {
+                    updateButtonStatus(buttonId, 'not-working', `Error: ${error.message}`);
+                    console.error(`Error testing button ${buttonId}:`, error);
+                }
+            } else {
+                updateButtonStatus(buttonId, 'not-working', 'Button not found');
+                console.warn(`Button ${buttonId} not found in DOM`);
+            }
+        }
+        
+        // Test all buttons
+        function testAllButtons() {
+            console.log('Testing all buttons...');
+            const buttons = document.querySelectorAll('button[id]');
+            buttons.forEach(button => {
+                testButton(button.id);
+            });
+        }
+        
+        // Run diagnostics
+        function runDiagnostics() {
+            console.log('Running button diagnostics...');
+            testAllButtons();
+        }
+        
+        // Apply fixes
+        function applyFixes() {
+            console.log('Applying button fixes...');
+            if (typeof window.ButtonFix !== 'undefined') {
+                window.ButtonFix.fixAllButtons();
+                console.log('Button fixes applied successfully');
+            } else {
+                console.error('ButtonFix module not found');
+            }
+        }
+        
+        // Clear console
+        function clearConsole() {
+            document.getElementById('testConsole').innerHTML = '';
+        }
+        
+        // Set up event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize button status
+            initializeButtonStatus();
+            
+            // Set up control buttons
+            document.getElementById('runDiagnostics').addEventListener('click', runDiagnostics);
+            document.getElementById('fixButtons').addEventListener('click', applyFixes);
+            document.getElementById('clearConsole').addEventListener('click', clearConsole);
+            
+            // Set up test buttons
+            const testButtons = document.querySelectorAll('.test-button');
+            testButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const buttonId = this.id || this.textContent;
+                    console.log(`Button clicked: ${buttonId}`);
+                });
+            });
+            
+            // Apply fixes on load
+            applyFixes();
+        });
+    </script>
+</body>
+</html>

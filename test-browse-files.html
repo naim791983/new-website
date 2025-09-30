@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Browse Files Button</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl shadow-lg p-8 max-w-md w-full">
+        <h1 class="text-2xl font-bold text-center mb-6">Test Browse Files Button</h1>
+        
+        <!-- Panel -->
+        <div class="border rounded-lg p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Test Panel</h2>
+            </div>
+            
+            <!-- Main Buttons -->
+            <div id="mainButtons" class="space-y-3">
+                <button class="w-full flex items-center justify-between p-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition">
+                    <span>Work Instructions</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="w-full flex items-center justify-between p-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition">
+                    <span>Visual AD Videos</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="w-full flex items-center justify-between p-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition">
+                    <span>Work Rules</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="w-full flex items-center justify-between p-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition">
+                    <span>Safety Guidelines</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <!-- Browse Files Container -->
+            <div id="browseFilesContainer" class="hidden mt-4">
+                <button id="browseFilesBtn" class="w-full flex items-center justify-center p-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg transition">
+                    <i class="fas fa-folder-open mr-2"></i> Browse Files
+                </button>
+            </div>
+        </div>
+        
+        <!-- Test Button -->
+        <div class="mt-6 text-center">
+            <button id="testBtn" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+                Test Direct File Dialog
+            </button>
+        </div>
+        
+        <!-- Logs -->
+        <div class="mt-6">
+            <h3 class="font-semibold mb-2">Action Logs:</h3>
+            <div id="logs" class="bg-gray-100 p-3 rounded h-32 overflow-y-auto text-sm"></div>
+        </div>
+    </div>
+
+    <script src="js/interactive-panel.js"></script>
+    <script>
+        // Simple test for direct file dialog
+        document.getElementById('testBtn').addEventListener('click', function() {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.multiple = true;
+            
+            fileInput.addEventListener('change', function(e) {
+                const files = e.target.files;
+                if (files.length > 0) {
+                    console.log('Selected files:', files);
+                    alert(`${files.length} file(s) selected`);
+                } else {
+                    console.log('No files selected');
+                }
+            });
+            
+            fileInput.click();
+        });
+        
+        // Simple log display
+        function logAction(action, data) {
+            const logDiv = document.getElementById('logs');
+            const time = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `[${time}] ${action}: ${JSON.stringify(data)}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        // Override the log function to display in our test UI
+        window.logAction = logAction;
+    </script>
+</body>
+</html>

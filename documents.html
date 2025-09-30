@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents | Bobinage Platform</title>
+    <meta name="description" content="Manage your technical documentation">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/document-buttons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361ee',
+                        secondary: '#3f37c9',
+                        accent: '#4cc9f0',
+                        dark: '#2b2d42',
+                        light: '#f8f9fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-cogs text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-gray-800">Bobinage Platform</h1>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="dashboard.html" class="text-gray-600 hover:text-primary transition flex items-center">
+                    <i class="fas fa-home mr-2"></i> Dashboard
+                </a>
+                <a href="#" class="text-primary font-semibold flex items-center">
+                    <i class="fas fa-folder mr-2"></i> Documents
+                </a>
+                <a href="admin.html" class="text-gray-600 hover:text-primary transition flex items-center">
+                    <i class="fas fa-history mr-2"></i> Activity
+                </a>
+                <a href="#" class="text-gray-600 hover:text-primary transition flex items-center">
+                    <i class="fas fa-cog mr-2"></i> Settings
+                </a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button class="relative p-2 text-gray-600 hover:text-primary">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full"></span>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-semibold user-initial">
+                        U
+                    </div>
+                    <span class="hidden md:inline user-name-display">User Name</span>
+                    <button id="logoutBtn" class="text-gray-600 hover:text-primary">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+            <div>
+                <h1 class="text-2xl font-bold">Document Library</h1>
+                <p class="text-gray-600">Manage and organize your technical documentation</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex space-x-3">
+                <button class="doc-btn doc-btn-filter">
+                    <i class="fas fa-filter mr-2"></i> Filter
+                </button>
+                <button id="uploadBtn" class="doc-btn doc-btn-primary">
+                    <i class="fas fa-upload mr-2"></i> Upload Document
+                </button>
+            </div>
+        </div>
+        
+        <!-- Breadcrumb -->
+        <div class="mb-6">
+            <nav class="flex text-gray-500 text-sm">
+                <a href="dashboard.html" class="hover:text-primary">Home</a>
+                <span class="mx-2">/</span>
+                <span class="text-gray-900">Documents</span>
+            </nav>
+        </div>
+        
+        <!-- Search and Filters -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="md:col-span-2">
+                    <div class="relative">
+                        <input type="text" class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Search documents...">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                <div>
+                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option>All Categories</option>
+                        <option>Installation Manuals</option>
+                        <option>Technical Specifications</option>
+                        <option>Training Materials</option>
+                        <option>Safety Guidelines</option>
+                        <option>Troubleshooting</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Article Reference Section -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <h2 class="text-xl font-bold mb-4">Article Reference Management</h2>
+            <div class="flex flex-col md:flex-row gap-4 mb-6">
+                <div class="flex-grow">
+                    <label class="block text-gray-700 mb-2" for="articleReference">Enter Article Reference</label>
+                    <input type="text" id="articleReference" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="e.g., 716460-51">
+                </div>
+                <div class="flex items-end">
+                    <button id="validateReference" class="doc-btn doc-btn-primary">
+                        Validate
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Validated References List -->
+            <div id="referencesContainer" class="mt-6">
+                <h3 class="text-lg font-semibold mb-3">Validated References</h3>
+                <div id="referencesList" class="space-y-3">
+                    <!-- References will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Document Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Folder 1 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-folder text-blue-500 text-xl"></i>
+                        </div>
+                        <button class="doc-btn doc-btn-icon text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Installation Manuals</h3>
+                    <p class="text-gray-500 text-sm mb-4">12 documents</p>
+                    <div class="flex justify-between text-sm text-gray-500">
+                        <span>Updated 2 days ago</span>
+                        <span>4.2 MB</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Folder 2 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-folder text-green-500 text-xl"></i>
+                        </div>
+                        <button class="doc-btn doc-btn-icon text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Technical Specifications</h3>
+                    <p class="text-gray-500 text-sm mb-4">8 documents</p>
+                    <div class="flex justify-between text-sm text-gray-500">
+                        <span>Updated 1 week ago</span>
+                        <span>15.7 MB</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Folder 3 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center">
+                            <i class="fas fa-folder text-purple-500 text-xl"></i>
+                        </div>
+                        <button class="doc-btn doc-btn-icon text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Training Materials</h3>
+                    <p class="text-gray-500 text-sm mb-4">15 documents</p>
+                    <div class="flex justify-between text-sm text-gray-500">
+                        <span>Updated 3 days ago</span>
+                        <span>89.4 MB</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Document 1 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-red-100 flex items-center justify-center">
+                            <i class="fas fa-file-pdf text-red-500 text-xl"></i>
+                        </div>
+                        <button class="doc-btn doc-btn-icon text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Installation Manual.pdf</h3>
+                    <p class="text-gray-500 text-sm mb-4">Reference: 716460-51</p>
+                    <div class="flex justify-between text-sm text-gray-500">
+                        <span>2.4 MB</span>
+                        <span>PDF</span>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-6 py-3 flex justify-between">
+                    <button class="doc-btn doc-btn-doc-action text-primary hover:text-secondary flex items-center text-sm">
+                        <i class="fas fa-download mr-1"></i> Download
+                    </button>
+                    <button class="doc-btn doc-btn-doc-action text-gray-500 hover:text-gray-700 flex items-center text-sm">
+                        <i class="fas fa-eye mr-1"></i> View
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Document 2 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-file-video text-blue-500 text-xl"></i>
+                        </div>
+                        <button class="doc-btn doc-btn-icon text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Training Video.mp4</h3>
+                    <p class="text-gray-500 text-sm mb-4">Reference: 716461-52</p>
+                    <div class="flex justify-between text-sm text-gray-500">
+                        <span>45.2 MB</span>
+                        <span>Video</span>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-6 py-3 flex justify-between">
+                    <button class="doc-btn doc-btn-doc-action text-primary hover:text-secondary flex items-center text-sm">
+                        <i class="fas fa-download mr-1"></i> Download
+                    </button>
+                    <button class="doc-btn doc-btn-doc-action text-gray-500 hover:text-gray-700 flex items-center text-sm">
+                        <i class="fas fa-play-circle mr-1"></i> Play
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Document 3 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-file-word text-green-500 text-xl"></i>
+                        </div>
+                        <button class="doc-btn doc-btn-icon text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Technical Specs.docx</h3>
+                    <p class="text-gray-500 text-sm mb-4">Reference: 716462-53</p>
+                    <div class="flex justify-between text-sm text-gray-500">
+                        <span>1.8 MB</span>
+                        <span>Document</span>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-6 py-3 flex justify-between">
+                    <button class="doc-btn doc-btn-doc-action text-primary hover:text-secondary flex items-center text-sm">
+                        <i class="fas fa-download mr-1"></i> Download
+                    </button>
+                    <button class="doc-btn doc-btn-doc-action text-gray-500 hover:text-gray-700 flex items-center text-sm">
+                        <i class="fas fa-eye mr-1"></i> View
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="mt-8 flex justify-center">
+            <div class="flex space-x-2">
+                <button class="doc-btn doc-btn-pagination">
+                    Previous
+                </button>
+                <button class="doc-btn doc-btn-pagination doc-btn-primary">
+                    1
+                </button>
+                <button class="doc-btn doc-btn-pagination">
+                    2
+                </button>
+                <button class="doc-btn doc-btn-pagination">
+                    3
+                </button>
+                <button class="doc-btn doc-btn-pagination">
+                    Next
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl w-full max-w-md p-6 mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Upload Document</h3>
+                <button id="closeUploadModal" class="doc-btn doc-btn-icon doc-btn-secondary">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="uploadForm">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="documentName">Document Name</label>
+                    <input type="text" id="documentName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter document name" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="reference">Reference</label>
+                    <input type="text" id="reference" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter reference number" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="category">Category</label>
+                    <select id="category" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                        <option value="">Select a category</option>
+                        <option>Installation Manuals</option>
+                        <option>Technical Specifications</option>
+                        <option>Training Materials</option>
+                        <option>Safety Guidelines</option>
+                        <option>Troubleshooting</option>
+                    </select>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2" for="file">File</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                        <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-3"></i>
+                        <p class="text-gray-600 mb-2">Drag & drop files here</p>
+                        <p class="text-gray-400 text-sm mb-3">or</p>
+                        <button type="button" class="doc-btn doc-btn-primary">
+                            Browse Files
+                        </button>
+                        <input type="file" id="file" class="hidden" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="doc-btn doc-btn-primary w-full">
+                    Upload Document
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reference Menu Modal -->
+    <div id="referenceMenuModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl w-full max-w-md p-6 mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Reference Options</h3>
+                <button id="closeReferenceMenu" class="doc-btn doc-btn-icon doc-btn-secondary">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <p class="text-gray-700 mb-4">Select an option for reference: <span id="selectedReference" class="font-semibold"></span></p>
+                
+                <div class="grid grid-cols-1 gap-3">
+                    <button id="at3600Btn" class="doc-btn doc-btn-primary w-full text-left">
+                        AT 3600 Electric Control
+                    </button>
+                    <button id="trainingBtn" class="doc-btn doc-btn-primary w-full text-left">
+                        Training
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submenu Modal -->
+    <div id="submenuModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl w-full max-w-md p-6 mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold" id="submenuTitle">Options</h3>
+                <button id="closeSubmenu" class="doc-btn doc-btn-icon doc-btn-secondary">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <div class="grid grid-cols-1 gap-3">
+                    <button class="submenu-option doc-btn doc-btn-secondary w-full text-left" data-option="Work Instructions">
+                        Work Instructions
+                    </button>
+                    <button class="submenu-option doc-btn doc-btn-secondary w-full text-left" data-option="Visual Aid">
+                        Visual Aid
+                    </button>
+                    <button class="submenu-option doc-btn doc-btn-secondary w-full text-left" data-option="Videos">
+                        Videos
+                    </button>
+                    <button class="submenu-option doc-btn doc-btn-secondary w-full text-left" data-option="Work Tools">
+                        Work Tools
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download File Modal -->
+    <div id="downloadFileModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl w-full max-w-md p-6 mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Download File</h3>
+                <button id="closeDownloadFile" class="doc-btn doc-btn-icon doc-btn-secondary">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <p class="text-gray-700 mb-4">Reference: <span id="downloadReference" class="font-semibold"></span></p>
+                <p class="text-gray-700 mb-4">Category: <span id="downloadCategory" class="font-semibold"></span></p>
+                <p class="text-gray-700 mb-4">Option: <span id="downloadOption" class="font-semibold"></span></p>
+                
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center mb-4">
+                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-3"></i>
+                    <p class="text-gray-600 mb-2">Drag & drop files here</p>
+                    <p class="text-gray-400 text-sm mb-3">or</p>
+                    <button type="button" class="doc-btn doc-btn-primary">
+                        Browse Files
+                    </button>
+                    <input type="file" id="downloadFileInput" class="hidden" accept=".pdf,.xlsx,.xls,.mp4,.avi,.mov,.wmv,.flv,.webm">
+                </div>
+                
+                <button id="uploadDownloadFile" class="doc-btn doc-btn-primary w-full">
+                    Upload File
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p class="text-gray-400">© 2025 Bobinage Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/button-activation.js"></script>
+    <script src="js/button-fix.js"></script>
+    <script src="js/document-buttons.js"></script>
+    <script>
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // If user is not logged in, redirect to index
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                window.location.href = 'index.html';
+            }
+            
+            // Update user display
+            const username = localStorage.getItem('username');
+            if (username) {
+                // Update user name displays
+                document.querySelectorAll('.user-name-display').forEach(element => {
+                    element.textContent = username;
+                });
+                
+                // Update user initial
+                const initial = username.charAt(0).toUpperCase();
+                document.querySelector('.user-initial').textContent = initial;
+            }
+            
+            // Initialize article reference functionality
+            initializeArticleReference();
+            
+            // Apply button fixes
+            if (typeof window.ButtonFix !== 'undefined') {
+                window.ButtonFix.fixAllButtons();
+            }
+        });
+        
+        // Initialize article reference functionality
+        function initializeArticleReference() {
+            const validateBtn = document.getElementById('validateReference');
+            const referenceInput = document.getElementById('articleReference');
+            const referencesList = document.getElementById('referencesList');
+            
+            // Load saved references from localStorage
+            loadReferences();
+            
+            // Validate reference button click
+            validateBtn.addEventListener('click', function() {
+                const reference = referenceInput.value.trim();
+                if (reference) {
+                    addReference(reference);
+                    referenceInput.value = '';
+                } else {
+                    alert('Please enter a valid reference');
+                }
+            });
+            
+            // Add reference to the list
+            function addReference(reference) {
+                // Check if reference already exists
+                const existingReferences = Array.from(referencesList.children).map(el => el.querySelector('.reference-text').textContent);
+                if (existingReferences.includes(reference)) {
+                    alert('This reference has already been added');
+                    return;
+                }
+                
+                // Create reference element
+                const referenceElement = document.createElement('div');
+                referenceElement.className = 'reference-item bg-gray-50 rounded-lg p-4 flex justify-between items-center';
+                referenceElement.innerHTML = `
+                    <span class="reference-text font-medium">${reference}</span>
+                    <button class="reference-menu-btn bg-primary hover:bg-secondary text-white px-3 py-1 rounded transition text-sm">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                `;
+                
+                // Add to the list
+                referencesList.appendChild(referenceElement);
+                
+                // Add click event to the menu button
+                const menuBtn = referenceElement.querySelector('.reference-menu-btn');
+                menuBtn.addEventListener('click', function() {
+                    openReferenceMenu(reference);
+                });
+                
+                // Save to localStorage
+                saveReferences();
+            }
+            
+            // Save references to localStorage
+            function saveReferences() {
+                const references = [];
+                document.querySelectorAll('.reference-text').forEach(el => {
+                    references.push(el.textContent);
+                });
+                localStorage.setItem('articleReferences', JSON.stringify(references));
+            }
+            
+            // Load references from localStorage
+            function loadReferences() {
+                const savedReferences = localStorage.getItem('articleReferences');
+                if (savedReferences) {
+                    const references = JSON.parse(savedReferences);
+                    references.forEach(ref => addReference(ref));
+                }
+            }
+            
+            // Open reference menu modal
+            function openReferenceMenu(reference) {
+                document.getElementById('selectedReference').textContent = reference;
+                document.getElementById('referenceMenuModal').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                
+                // Set up button events
+                document.getElementById('at3600Btn').onclick = function() {
+                    openSubmenu(reference, 'AT 3600 Electric Control');
+                };
+                
+                document.getElementById('trainingBtn').onclick = function() {
+                    openSubmenu(reference, 'Training');
+                };
+            }
+            
+            // Open submenu modal
+            function openSubmenu(reference, category) {
+                document.getElementById('submenuTitle').textContent = category;
+                document.getElementById('referenceMenuModal').classList.add('hidden');
+                document.getElementById('submenuModal').classList.remove('hidden');
+                
+                // Set up submenu option events
+                document.querySelectorAll('.submenu-option').forEach(button => {
+                    button.onclick = function() {
+                        const option = this.getAttribute('data-option');
+                        openDownloadFileModal(reference, category, option);
+                    };
+                });
+            }
+            
+            // Open download file modal
+            function openDownloadFileModal(reference, category, option) {
+                document.getElementById('downloadReference').textContent = reference;
+                document.getElementById('downloadCategory').textContent = category;
+                document.getElementById('downloadOption').textContent = option;
+                document.getElementById('submenuModal').classList.add('hidden');
+                document.getElementById('downloadFileModal').classList.remove('hidden');
+                
+                // Set up upload button
+                document.getElementById('uploadDownloadFile').onclick = function() {
+                    alert(`File uploaded successfully for ${reference} - ${category} - ${option}`);
+                    closeAllModals();
+                };
+            }
+            
+            // Close all modals
+            function closeAllModals() {
+                document.getElementById('referenceMenuModal').classList.add('hidden');
+                document.getElementById('submenuModal').classList.add('hidden');
+                document.getElementById('downloadFileModal').classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Set up close buttons
+            document.getElementById('closeReferenceMenu').addEventListener('click', closeAllModals);
+            document.getElementById('closeSubmenu').addEventListener('click', closeAllModals);
+            document.getElementById('closeDownloadFile').addEventListener('click', closeAllModals);
+            
+            // Close modal when clicking outside
+            document.getElementById('referenceMenuModal').addEventListener('click', function(e) {
+                if (e.target === this) closeAllModals();
+            });
+            
+            document.getElementById('submenuModal').addEventListener('click', function(e) {
+                if (e.target === this) closeAllModals();
+            });
+            
+            document.getElementById('downloadFileModal').addEventListener('click', function(e) {
+                if (e.target === this) closeAllModals();
+            });
+        }
+        
+        // Handle upload modal
+        const uploadBtn = document.getElementById('uploadBtn');
+        const uploadModal = document.getElementById('uploadModal');
+        const closeUploadModal = document.getElementById('closeUploadModal');
+        
+        if (uploadBtn) {
+            uploadBtn.addEventListener('click', () => {
+                uploadModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        if (closeUploadModal) {
+            closeUploadModal.addEventListener('click', () => {
+                uploadModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+        
+        // Close modal when clicking outside
+        if (uploadModal) {
+            uploadModal.addEventListener('click', (e) => {
+                if (e.target === uploadModal) {
+                    uploadModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+        
+        // Handle logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear login status from localStorage
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                
+                // Redirect to index page
+                window.location.href = 'index.html';
+            }
+        });
+        
+        // Handle upload form submission
+        const uploadForm = document.getElementById('uploadForm');
+        if (uploadForm) {
+            uploadForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const documentName = document.getElementById('documentName').value;
+                const reference = document.getElementById('reference').value;
+                const category = document.getElementById('category').value;
+                const file = document.getElementById('file').files[0];
+                
+                // Simple validation
+                if (!documentName || !reference || !category || !file) {
+                    alert('Please fill in all fields and select a file');
+                    return;
+                }
+                
+                // In a real application, you would send this data to a server
+                // For now, we'll just show a success message
+                alert(`Document "${documentName}" uploaded successfully!`);
+                
+                // Reset form and close modal
+                uploadForm.reset();
+                uploadModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+@echo off
+echo Opening Bobinage Platform Test Page...
+start "" "test-panel.html"

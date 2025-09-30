@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Bobinage Platform</title>
+    <meta name="description" content="Bobinage Platform Dashboard">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361ee',
+                        secondary: '#3f37c9',
+                        accent: '#4cc9f0',
+                        dark: '#2b2d42',
+                        light: '#f8f9fa'
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-cogs text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-gray-800">Bobinage Platform</h1>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-gray-600 hover:text-primary transition flex items-center">
+                    <i class="fas fa-home mr-2"></i> Dashboard
+                </a>
+                <a href="documents.html" class="text-gray-600 hover:text-primary transition flex items-center">
+                    <i class="fas fa-folder mr-2"></i> Documents
+                </a>
+                <a href="admin.html" class="text-gray-600 hover:text-primary transition flex items-center">
+                    <i class="fas fa-history mr-2"></i> Activity
+                </a>
+                <a href="#" class="text-gray-600 hover:text-primary transition flex items-center">
+                    <i class="fas fa-cog mr-2"></i> Settings
+                </a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button class="relative p-2 text-gray-600 hover:text-primary">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full"></span>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-semibold user-initial">
+                        U
+                    </div>
+                    <span class="hidden md:inline user-name-display">User Name</span>
+                    <button id="logoutBtn" class="text-gray-600 hover:text-primary">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Welcome Section -->
+        <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-xl p-6 mb-8">
+            <h1 class="text-2xl font-bold mb-2">Welcome back, <span class="user-name-display">User</span>!</h1>
+            <p class="opacity-90">Here's what's happening with your documentation today.</p>
+        </div>
+        
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Stat Card 1 -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-500 text-sm">Total Documents</p>
+                        <h3 class="text-2xl font-bold mt-1">128</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                        <i class="fas fa-file-alt text-primary"></i>
+                    </div>
+                </div>
+                <p class="text-green-500 text-sm mt-3 flex items-center">
+                    <i class="fas fa-arrow-up mr-1"></i> 12% from last month
+                </p>
+            </div>
+            
+            <!-- Stat Card 2 -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-500 text-sm">Active Users</p>
+                        <h3 class="text-2xl font-bold mt-1">24</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                        <i class="fas fa-users text-primary"></i>
+                    </div>
+                </div>
+                <p class="text-green-500 text-sm mt-3 flex items-center">
+                    <i class="fas fa-arrow-up mr-1"></i> 5% from last month
+                </p>
+            </div>
+            
+            <!-- Stat Card 3 -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-500 text-sm">Downloads</p>
+                        <h3 class="text-2xl font-bold mt-1">1,248</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                        <i class="fas fa-download text-primary"></i>
+                    </div>
+                </div>
+                <p class="text-green-500 text-sm mt-3 flex items-center">
+                    <i class="fas fa-arrow-up mr-1"></i> 8% from last month
+                </p>
+            </div>
+            
+            <!-- Stat Card 4 -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-500 text-sm">Storage Used</p>
+                        <h3 class="text-2xl font-bold mt-1">24.5 GB</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                        <i class="fas fa-database text-primary"></i>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-sm mt-3">of 100 GB</p>
+            </div>
+        </div>
+        
+        <!-- Recent Activity & Documents -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Recent Documents -->
+            <div class="bg-white rounded-xl shadow-sm">
+                <div class="p-6 border-b border-gray-100">
+                    <h2 class="text-xl font-bold">Recent Documents</h2>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <!-- Document 1 -->
+                        <div class="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg transition">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center mr-4">
+                                    <i class="fas fa-file-pdf text-red-500"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium">Installation Manual.pdf</h3>
+                                    <p class="text-gray-500 text-sm">Added 2 hours ago</p>
+                                </div>
+                            </div>
+                            <button class="text-gray-500 hover:text-primary">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Document 2 -->
+                        <div class="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg transition">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-4">
+                                    <i class="fas fa-file-video text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium">Training Video.mp4</h3>
+                                    <p class="text-gray-500 text-sm">Added yesterday</p>
+                                </div>
+                            </div>
+                            <button class="text-gray-500 hover:text-primary">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Document 3 -->
+                        <div class="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg transition">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mr-4">
+                                    <i class="fas fa-file-word text-green-500"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium">Technical Specs.docx</h3>
+                                    <p class="text-gray-500 text-sm">Added 3 days ago</p>
+                                </div>
+                            </div>
+                            <button class="text-gray-500 hover:text-primary">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Document 4 -->
+                        <div class="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg transition">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center mr-4">
+                                    <i class="fas fa-file-excel text-yellow-500"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium">Inventory.xlsx</h3>
+                                    <p class="text-gray-500 text-sm">Added 1 week ago</p>
+                                </div>
+                            </div>
+                            <button class="text-gray-500 hover:text-primary">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full mt-6 py-3 text-center text-primary font-medium hover:bg-gray-50 rounded-lg transition">
+                        <a href="documents.html">View All Documents <i class="fas fa-arrow-right ml-2"></i></a>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="bg-white rounded-xl shadow-sm">
+                <div class="p-6 border-b border-gray-100">
+                    <h2 class="text-xl font-bold">Recent Activity</h2>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-6">
+                        <!-- Activity 1 -->
+                        <div class="flex">
+                            <div class="mr-4">
+                                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Document Downloaded</h3>
+                                <p class="text-gray-600">Jean Dupont downloaded "Installation Manual.pdf"</p>
+                                <p class="text-gray-500 text-sm mt-1">2 hours ago</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity 2 -->
+                        <div class="flex">
+                            <div class="mr-4">
+                                <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white">
+                                    <i class="fas fa-upload"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">New Document Uploaded</h3>
+                                <p class="text-gray-600">Marie Laurent uploaded "Training Video.mp4"</p>
+                                <p class="text-gray-500 text-sm mt-1">Yesterday</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity 3 -->
+                        <div class="flex">
+                            <div class="mr-4">
+                                <div class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-white">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">New User Added</h3>
+                                <p class="text-gray-600">Pierre Martin was added to the team</p>
+                                <p class="text-gray-500 text-sm mt-1">2 days ago</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity 4 -->
+                        <div class="flex">
+                            <div class="mr-4">
+                                <div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Document Deleted</h3>
+                                <p class="text-gray-600">Old version of "Technical Specs.docx" was removed</p>
+                                <p class="text-gray-500 text-sm mt-1">3 days ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full mt-6 py-3 text-center text-primary font-medium hover:bg-gray-50 rounded-lg transition">
+                        <a href="admin.html">View All Activity <i class="fas fa-arrow-right ml-2"></i></a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mt-8">
+            <h2 class="text-xl font-bold mb-6">Quick Actions</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button class="flex flex-col items-center justify-center p-6 bg-gray-50 hover:bg-primary/10 rounded-lg transition">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                        <i class="fas fa-file-upload text-primary text-xl"></i>
+                    </div>
+                    <span class="font-medium">Upload Document</span>
+                </button>
+                
+                <button class="flex flex-col items-center justify-center p-6 bg-gray-50 hover:bg-primary/10 rounded-lg transition">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                        <i class="fas fa-folder-plus text-primary text-xl"></i>
+                    </div>
+                    <span class="font-medium">New Folder</span>
+                </button>
+                
+                <button class="flex flex-col items-center justify-center p-6 bg-gray-50 hover:bg-primary/10 rounded-lg transition">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                        <i class="fas fa-share-alt text-primary text-xl"></i>
+                    </div>
+                    <span class="font-medium">Share</span>
+                </button>
+                
+                <button class="flex flex-col items-center justify-center p-6 bg-gray-50 hover:bg-primary/10 rounded-lg transition">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                        <i class="fas fa-chart-bar text-primary text-xl"></i>
+                    </div>
+                    <span class="font-medium">Reports</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Interactive Panel -->
+        <div id="interactivePanel" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-xl p-6 w-full max-w-md mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold" id="panelTitle">Panel Title</h3>
+                    <button id="closePanel" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div id="mainButtons" class="space-y-3">
+                    <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                        <span>Work Instructions</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                        <span>Visual AD Videos</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                        <span>Work Rules</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                        <span>Safety Guidelines</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div id="browseFilesContainer" class="hidden mt-4">
+                    <button id="browseFilesBtn" class="w-full flex items-center justify-center p-4 bg-primary text-white hover:bg-primary/90 rounded-lg transition-all duration-200">
+                        <i class="fas fa-folder-open mr-2"></i> Browse Files
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Action Buttons -->
+        <div class="fixed bottom-8 right-8 space-y-4 z-40">
+            <button id="at3600Btn" class="bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary/90 transition-all transform hover:scale-105">
+                <i class="fas fa-cogs text-xl"></i>
+                <span class="sr-only">AT 3600 Electric Control</span>
+            </button>
+            <button id="trainingBtn" class="bg-secondary text-white p-4 rounded-full shadow-lg hover:bg-secondary/90 transition-all transform hover:scale-105">
+                <i class="fas fa-graduation-cap text-xl"></i>
+                <span class="sr-only">Training</span>
+            </button>
+        </div>
+        
+        <!-- JavaScript -->
+        <script src="js/main.js"></script>
+        <script src="js/interactive-panel-fix.js"></script>
+        <script src="js/button-activation.js"></script>
+        <script src="js/button-fix.js"></script>
+        
+        <script>
+            // Handle logout
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                if (confirm('Are you sure you want to logout?')) {
+                    // Clear login status from localStorage
+                    localStorage.removeItem('isLoggedIn');
+                    localStorage.removeItem('username');
+                    
+                    // Redirect to index page
+                    window.location.href = 'index.html';
+                }
+            });
+            
+            // Update user display on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                const username = localStorage.getItem('username');
+                if (username) {
+                    // Update user name displays
+                    document.querySelectorAll('.user-name-display').forEach(element => {
+                        element.textContent = username;
+                    });
+                    
+                    // Update user initial
+                    const initial = username.charAt(0).toUpperCase();
+                    const userInitial = document.querySelector('.user-initial');
+                    if (userInitial) {
+                        userInitial.textContent = initial;
+                    }
+                }
+                
+                // Apply button fixes
+                if (typeof window.ButtonFix !== 'undefined') {
+                    window.ButtonFix.fixAllButtons();
+                }
+            });
+        </script>
+    </body>
+</html>

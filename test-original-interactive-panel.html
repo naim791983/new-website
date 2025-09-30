@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Original Interactive Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-center my-6">Test Original Interactive Panel</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Test Buttons -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">Test Buttons</h2>
+                <div class="space-y-4">
+                    <button id="at3600Btn" class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition">
+                        <i class="fas fa-cogs mr-2"></i> AT 3600 Electric Control
+                    </button>
+                    <button id="trainingBtn" class="w-full bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600 transition">
+                        <i class="fas fa-graduation-cap mr-2"></i> Training
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Logs -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">Action Logs</h2>
+                <div class="mb-4">
+                    <button id="clearLogs" class="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600 transition">
+                        Clear Logs
+                    </button>
+                </div>
+                <div id="logs" class="bg-gray-100 p-3 rounded h-64 overflow-y-auto text-sm font-mono"></div>
+            </div>
+        </div>
+        
+        <!-- Interactive Panel -->
+        <div id="interactivePanel" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-xl p-6 w-full max-w-md mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold" id="panelTitle">Panel Title</h3>
+                    <button id="closePanel" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div id="mainButtons" class="space-y-3">
+                    <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                        <span>Work Instructions</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                        <span>Visual AD Videos</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                        <span>Work Rules</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                        <span>Safety Guidelines</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div id="browseFilesContainer" class="hidden mt-4">
+                    <button id="browseFilesBtn" class="w-full flex items-center justify-center p-4 bg-primary text-white hover:bg-primary/90 rounded-lg transition-all duration-200">
+                        <i class="fas fa-folder-open mr-2"></i> Browse Files
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/interactive-panel.js"></script>
+    <script>
+        // Add logging to display in our UI
+        const originalLogAction = window.logAction || function() {};
+        window.logAction = function(action, data) {
+            originalLogAction(action, data);
+            
+            // Display in our UI
+            const logsDiv = document.getElementById('logs');
+            const time = new Date().toLocaleTimeString();
+            logsDiv.innerHTML += `[${time}] ${action}: ${JSON.stringify(data)}\n`;
+            logsDiv.scrollTop = logsDiv.scrollHeight;
+        };
+        
+        // Clear logs button
+        document.getElementById('clearLogs').addEventListener('click', function() {
+            document.getElementById('logs').innerHTML = '';
+        });
+        
+        // Close panel functionality
+        document.getElementById('closePanel').addEventListener('click', function() {
+            document.getElementById('interactivePanel').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+    </script>
+</body>
+</html>

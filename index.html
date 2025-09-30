@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bobinage Platform | Modern Solution</title>
+    <meta name="description" content="Modern Bobinage Platform for technical documentation management">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361ee',
+                        secondary: '#3f37c9',
+                        accent: '#4cc9f0',
+                        dark: '#2b2d42',
+                        light: '#f8f9fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-cogs text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-gray-800">Bobinage Platform</h1>
+            </div>
+            
+            <nav class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-600 hover:text-primary transition">Home</a>
+                <a href="#features" class="text-gray-600 hover:text-primary transition">Documentation</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary transition">Resources</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary transition">Contact</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button id="loginBtn" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg transition flex items-center">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Login
+                </button>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-primary to-secondary text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Modern Technical Documentation Platform</h1>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Streamline your bobinage documentation management with our intuitive platform</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button id="getStartedBtn" class="bg-white text-primary hover:bg-gray-100 font-semibold px-6 py-3 rounded-lg transition transform hover:-translate-y-1">
+                    Get Started
+                </button>
+                <button class="bg-transparent border-2 border-white hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition">
+                    <i class="fas fa-play-circle mr-2"></i> Watch Demo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Powerful Features</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Everything you need to manage your technical documentation efficiently</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-file-upload text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Document Management</h3>
+                    <p class="text-gray-600">Easily upload, organize, and manage all your technical documentation in one place.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-search text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Smart Search</h3>
+                    <p class="text-gray-600">Quickly find what you need with our powerful search functionality.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-history text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Activity Logging</h3>
+                    <p class="text-gray-600">Track all document uploads, downloads, and user activities automatically.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">User Management</h3>
+                    <p class="text-gray-600">Control access with role-based permissions and user authentication.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-mobile-alt text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Mobile Responsive</h3>
+                    <p class="text-gray-600">Access your documents on any device with our fully responsive design.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Secure Storage</h3>
+                    <p class="text-gray-600">Keep your sensitive documentation secure with enterprise-grade security.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">How It Works</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Get started in three simple steps</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center mx-auto mb-6 text-xl font-bold">1</div>
+                    <h3 class="text-xl font-semibold mb-3">Create Account</h3>
+                    <p class="text-gray-600">Sign up for a free account and set up your organization profile.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center mx-auto mb-6 text-xl font-bold">2</div>
+                    <h3 class="text-xl font-semibold mb-3">Upload Documents</h3>
+                    <p class="text-gray-600">Upload your technical documentation and organize them by categories.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center mx-auto mb-6 text-xl font-bold">3</div>
+                    <h3 class="text-xl font-semibold mb-3">Collaborate & Share</h3>
+                    <p class="text-gray-600">Share documents with your team and track all activities in real-time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">What Our Users Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Join thousands of satisfied users who have transformed their documentation workflow</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
+                        <div>
+                            <h4 class="font-semibold">Jean Dupont</h4>
+                            <p class="text-gray-600 text-sm">Engineering Manager</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"This platform has completely transformed how we manage our technical documentation. It's intuitive, secure, and has saved us countless hours."</p>
+                    <div class="flex text-yellow-400 mt-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
+                        <div>
+                            <h4 class="font-semibold">Marie Laurent</h4>
+                            <p class="text-gray-600 text-sm">Quality Assurance Lead</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"The search functionality is incredible. Finding specific documentation that used to take 15 minutes now takes seconds. Highly recommended!"</p>
+                    <div class="flex text-yellow-400 mt-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
+                        <div>
+                            <h4 class="font-semibold">Pierre Martin</h4>
+                            <p class="text-gray-600 text-sm">Operations Director</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"The activity logging feature has been invaluable for our compliance requirements. We can track every document access and modification with ease."</p>
+                    <div class="flex text-yellow-400 mt-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Documentation?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of professionals who trust our platform for their technical documentation needs.</p>
+            <button id="ctaLoginBtn" class="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-4 rounded-lg transition transform hover:-translate-y-1 text-lg">
+                Start Free Trial
+            </button>
+            <p class="mt-4 text-primary/80">No credit card required • 14-day free trial</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Have questions? Our team is here to help you get started.</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto bg-gray-50 rounded-xl p-8">
+                <form>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="name">Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Your name">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="email">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Your email">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2" for="subject">Subject</label>
+                        <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Subject">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2" for="message">Message</label>
+                        <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Your message"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-secondary text-white font-semibold py-3 rounded-lg transition">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-cogs text-primary text-2xl"></i>
+                        <h3 class="text-xl font-bold">Bobinage Platform</h3>
+                    </div>
+                    <p class="text-gray-400">Modern solution for technical documentation management in the bobinage industry.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#features" class="hover:text-white transition">Features</a></li>
+                        <li><a href="#" class="hover:text-white transition">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white transition">Integrations</a></li>
+                        <li><a href="#" class="hover:text-white transition">Roadmap</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition">Tutorials</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2025 Bobinage Platform. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-github"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl w-full max-w-md p-6 mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Login to Your Account</h3>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="username">Username</label>
+                    <input type="text" id="username" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter your username" required>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2" for="password">Password</label>
+                    <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="w-full bg-primary hover:bg-secondary text-white font-semibold py-3 rounded-lg transition">
+                    Login
+                </button>
+                
+                <div class="mt-4 text-center">
+                    <a href="#" class="text-primary hover:underline">Forgot your password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/button-activation.js"></script>
+    <script src="js/button-fix.js"></script>
+    <script>
+        // Handle login redirect on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // If user is already logged in, redirect to dashboard
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                window.location.href = 'dashboard.html';
+            }
+            
+            // Handle Get Started button
+            const getStartedBtn = document.getElementById('getStartedBtn');
+            const ctaLoginBtn = document.getElementById('ctaLoginBtn');
+            
+            if (getStartedBtn) {
+                getStartedBtn.addEventListener('click', function() {
+                    // If user is logged in, go to dashboard, otherwise open login modal
+                    if (localStorage.getItem('isLoggedIn') === 'true') {
+                        window.location.href = 'dashboard.html';
+                    } else {
+                        document.getElementById('loginBtn').click();
+                    }
+                });
+            }
+            
+            if (ctaLoginBtn) {
+                ctaLoginBtn.addEventListener('click', function() {
+                    // If user is logged in, go to dashboard, otherwise open login modal
+                    if (localStorage.getItem('isLoggedIn') === 'true') {
+                        window.location.href = 'dashboard.html';
+                    } else {
+                        document.getElementById('loginBtn').click();
+                    }
+                });
+            }
+            
+            // Apply button fixes
+            if (typeof window.ButtonFix !== 'undefined') {
+                window.ButtonFix.fixAllButtons();
+            }
+        });
+    </script>
+</body>
+</html>

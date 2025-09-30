@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Interactive Panel</title>
+    <meta name="description" content="Test page for interactive panel functionality">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361ee',
+                        secondary: '#3f37c9',
+                        accent: '#4cc9f0',
+                        dark: '#2b2d42',
+                        light: '#f8f9fa'
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-cogs text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-gray-800">Bobinage Platform - Test Page</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h1 class="text-2xl font-bold mb-4">Interactive Panel Test</h1>
+            <p class="mb-6">Click the buttons below to test the interactive panel functionality:</p>
+            
+            <div class="flex flex-wrap gap-4">
+                <button id="at3600Btn" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-all">
+                    <i class="fas fa-cogs mr-2"></i> AT 3600 Electric Control
+                </button>
+                <button id="trainingBtn" class="bg-secondary text-white px-6 py-3 rounded-lg hover:bg-secondary/90 transition-all">
+                    <i class="fas fa-graduation-cap mr-2"></i> Training
+                </button>
+            </div>
+            
+            <div class="mt-8">
+                <h2 class="text-xl font-bold mb-4">How to Test</h2>
+                <ol class="list-decimal list-inside space-y-2">
+                    <li>Click either of the two buttons above</li>
+                    <li>A panel will appear with four buttons: Work Instructions, Visual AD Videos, Work Rules, and Safety Guidelines</li>
+                    <li>Click any of these buttons</li>
+                    <li>A "Browse Files" button will appear</li>
+                    <li>Click the "Browse Files" button to open a file dialog</li>
+                    <li>Check the browser console for logged actions</li>
+                </ol>
+            </div>
+            
+            <div class="mt-8">
+                <h2 class="text-xl font-bold mb-4">View Logs</h2>
+                <button id="viewLogsBtn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 transition">
+                    View Action Logs
+                </button>
+                <div id="logsContainer" class="mt-4 hidden">
+                    <h3 class="font-bold mb-2">Action Logs:</h3>
+                    <pre id="logsOutput" class="bg-gray-100 p-4 rounded overflow-auto max-h-60"></pre>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Interactive Panel -->
+    <div id="interactivePanel" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-6 w-full max-w-md mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold" id="panelTitle">Panel Title</h3>
+                <button id="closePanel" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="mainButtons" class="space-y-3">
+                <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                    <span>Work Instructions</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                    <span>Visual AD Videos</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                    <span>Work Rules</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-primary/10 rounded-lg transition-all duration-200">
+                    <span>Safety Guidelines</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div id="browseFilesContainer" class="hidden mt-4">
+                <button id="browseFilesBtn" class="w-full flex items-center justify-center p-4 bg-primary text-white hover:bg-primary/90 rounded-lg transition-all duration-200">
+                    <i class="fas fa-folder-open mr-2"></i> Browse Files
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Action Buttons -->
+    <div class="fixed bottom-8 right-8 space-y-4 z-40">
+        <button id="at3600BtnFloating" class="bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary/90 transition-all transform hover:scale-105">
+            <i class="fas fa-cogs text-xl"></i>
+            <span class="sr-only">AT 3600 Electric Control</span>
+        </button>
+        <button id="trainingBtnFloating" class="bg-secondary text-white p-4 rounded-full shadow-lg hover:bg-secondary/90 transition-all transform hover:scale-105">
+            <i class="fas fa-graduation-cap text-xl"></i>
+            <span class="sr-only">Training</span>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/interactive-panel.js"></script>
+    
+    <script>
+        // View logs functionality
+        document.getElementById('viewLogsBtn').addEventListener('click', function() {
+            const logsContainer = document.getElementById('logsContainer');
+            const logsOutput = document.getElementById('logsOutput');
+            
+            if (logsContainer.classList.contains('hidden')) {
+                // Show logs
+                const logs = JSON.parse(localStorage.getItem('actionLogs') || '[]');
+                logsOutput.textContent = JSON.stringify(logs, null, 2);
+                logsContainer.classList.remove('hidden');
+            } else {
+                // Hide logs
+                logsContainer.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

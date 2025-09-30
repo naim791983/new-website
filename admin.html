@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration | Bobinage Platform</title>
+    <meta name="description" content="Bobinage Platform Administration Panel">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/document-buttons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361ee',
+                        secondary: '#3f37c9',
+                        accent: '#4cc9f0',
+                        dark: '#2b2d42',
+                        light: '#f8f9fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-cogs text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-gray-800">Bobinage Platform</h1>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="dashboard.html" class="text-gray-600 hover:text-primary transition flex items-center">
+                    <i class="fas fa-home mr-2"></i> Dashboard
+                </a>
+                <a href="documents.html" class="text-gray-600 hover:text-primary transition flex items-center">
+                    <i class="fas fa-users mr-2"></i> Users
+                </a>
+                <a href="documents.html" class="text-gray-600 hover:text-primary transition flex items-center">
+                    <i class="fas fa-folder mr-2"></i> Documents
+                </a>
+                <a href="#" class="text-primary font-semibold flex items-center">
+                    <i class="fas fa-history mr-2"></i> Activity Logs
+                </a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button class="relative p-2 text-gray-600 hover:text-primary">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full"></span>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-semibold user-initial">
+                        A
+                    </div>
+                    <span class="hidden md:inline user-name-display">Admin User</span>
+                    <button id="logoutBtn" class="text-gray-600 hover:text-primary">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+            <div>
+                <h1 class="text-2xl font-bold">Activity Logs</h1>
+                <p class="text-gray-600">Monitor all user activities and system events</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <button class="doc-btn doc-btn-primary">
+                    <i class="fas fa-download mr-2"></i> Export Logs
+                </button>
+            </div>
+        </div>
+        
+        <!-- Filters -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-2">Activity Type</label>
+                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option>All Activities</option>
+                        <option>Uploads</option>
+                        <option>Downloads</option>
+                        <option>User Actions</option>
+                        <option>System Events</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-2">User</label>
+                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option>All Users</option>
+                        <option>Jean Dupont</option>
+                        <option>Marie Laurent</option>
+                        <option>Pierre Martin</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-2">Date Range</label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Select dates">
+                </div>
+                
+                <div class="flex items-end">
+                    <button class="doc-btn doc-btn-primary w-full">
+                        Apply Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Activity Logs Table -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Activity</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Document</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date & Time</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IP Address</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Log Entry 1 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-download text-green-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">Document Download</div>
+                                        <div class="text-sm text-gray-500">PDF File</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Jean Dupont</div>
+                                <div class="text-sm text-gray-500">jean.dupont@company.com</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Installation Manual.pdf
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Sep 30, 2025 14:30
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                192.168.1.45
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="doc-btn doc-btn-icon doc-btn-primary mr-3">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="doc-btn doc-btn-icon doc-btn-secondary">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        <!-- Log Entry 2 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-upload text-blue-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">Document Upload</div>
+                                        <div class="text-sm text-gray-500">Video File</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Marie Laurent</div>
+                                <div class="text-sm text-gray-500">marie.laurent@company.com</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Training Video.mp4
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Sep 30, 2025 11:15
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                192.168.1.32
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="doc-btn doc-btn-icon doc-btn-primary mr-3">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="doc-btn doc-btn-icon doc-btn-secondary">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        <!-- Log Entry 3 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-user-plus text-yellow-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">User Added</div>
+                                        <div class="text-sm text-gray-500">New Account</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Admin User</div>
+                                <div class="text-sm text-gray-500">admin@company.com</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Pierre Martin
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Sep 29, 2025 16:45
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                192.168.1.10
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="doc-btn doc-btn-icon doc-btn-primary mr-3">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="doc-btn doc-btn-icon doc-btn-secondary">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        <!-- Log Entry 4 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-folder-open text-purple-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">Folder Accessed</div>
+                                        <div class="text-sm text-gray-500">Directory View</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Pierre Martin</div>
+                                <div class="text-sm text-gray-500">pierre.martin@company.com</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Technical Docs 2025
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Sep 29, 2025 14:20
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                192.168.1.67
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="doc-btn doc-btn-icon doc-btn-primary mr-3">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="doc-btn doc-btn-icon doc-btn-secondary">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        <!-- Log Entry 5 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-trash text-red-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">Document Deleted</div>
+                                        <div class="text-sm text-gray-500">File Removal</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Jean Dupont</div>
+                                <div class="text-sm text-gray-500">jean.dupont@company.com</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Old Manual.pdf
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Sep 28, 2025 10:30
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                192.168.1.45
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="doc-btn doc-btn-icon doc-btn-primary mr-3">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="doc-btn doc-btn-icon doc-btn-secondary">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="bg-white px-6 py-4 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-700">
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">128</span> results
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="doc-btn doc-btn-pagination">
+                            Previous
+                        </button>
+                        <button class="doc-btn doc-btn-pagination doc-btn-primary">
+                            1
+                        </button>
+                        <button class="doc-btn doc-btn-pagination">
+                            2
+                        </button>
+                        <button class="doc-btn doc-btn-pagination">
+                            3
+                        </button>
+                        <button class="doc-btn doc-btn-pagination">
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                        <i class="fas fa-download text-green-500 text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-500">Total Downloads</p>
+                        <h3 class="text-2xl font-bold">1,248</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                        <i class="fas fa-upload text-blue-500 text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-500">Total Uploads</p>
+                        <h3 class="text-2xl font-bold">864</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                        <i class="fas fa-user-friends text-purple-500 text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-500">Active Users</p>
+                        <h3 class="text-2xl font-bold">24</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p class="text-gray-400">© 2025 Bobinage Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/button-activation.js"></script>
+    <script src="js/button-fix.js"></script>
+    <script>
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // If user is not logged in, redirect to index
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                window.location.href = 'index.html';
+            }
+            
+            // Update user display
+            const username = localStorage.getItem('username');
+            if (username) {
+                // Update user name displays
+                document.querySelectorAll('.user-name-display').forEach(element => {
+                    element.textContent = username;
+                });
+                
+                // Update user initial
+                const initial = username.charAt(0).toUpperCase();
+                document.querySelector('.user-initial').textContent = initial;
+            }
+            
+            // Apply button fixes
+            if (typeof window.ButtonFix !== 'undefined') {
+                window.ButtonFix.fixAllButtons();
+            }
+        });
+        
+        // Handle logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear login status from localStorage
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                
+                // Redirect to index page
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

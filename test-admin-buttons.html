@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Admin Buttons</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/document-buttons.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        .test-section {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Button Test Page</h1>
+    
+    <div class="test-section">
+        <h2>Activity Log Button Types</h2>
+        <div class="button-grid">
+            <button class="doc-btn doc-btn-primary">
+                <i class="fas fa-download mr-2"></i> Export Logs
+            </button>
+            <button class="doc-btn doc-btn-primary">
+                Apply Filters
+            </button>
+            <button class="doc-btn doc-btn-icon doc-btn-primary">
+                <i class="fas fa-eye"></i>
+            </button>
+            <button class="doc-btn doc-btn-icon doc-btn-secondary">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <button class="doc-btn doc-btn-pagination">
+                Previous
+            </button>
+            <button class="doc-btn doc-btn-pagination doc-btn-primary">
+                1
+            </button>
+            <button class="doc-btn doc-btn-pagination">
+                Next
+            </button>
+        </div>
+    </div>
+
+    <script src="js/document-buttons.js"></script>
+    <script>
+        // Test button feedback
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.doc-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (typeof window.DocumentButtons !== 'undefined') {
+                        window.DocumentButtons.showButtonFeedback(this, 'Button clicked!');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
